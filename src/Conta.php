@@ -1,9 +1,20 @@
 <?php
 
+require_once 'Titular.php';
+
 class Conta{
-    private string $cpfTitular;
-    private string $nomeTitular;
+    public readonly Titular $titular;
     private float $saldo = 0;
+    private static int $numeroContas = 0;
+
+    public function __construct(Titular $titular){
+        $this -> titular = $titular;
+        self::$numeroContas++;
+    }
+
+    public function __destruct(){
+        self::$numeroContas--;
+    }
 
     public function sacar(float $valorSacar): void{
         if($this -> saldo < $valorSacar){
@@ -33,23 +44,11 @@ class Conta{
         $contaDestino -> depositar($valorATransferir);
     }
 
-    public function setNomeTitular(string $nome): void {
-        $this -> nomeTitular = $nome;
-    }
-
-    public function setCpfTitular(string $cpf): void {
-        $this -> cpfTitular = $cpf;
-    }
-
-    public function getNomeTitular(): string {
-        return $this -> nomeTitular;
-    }
-
-    public function getCpfTitular(): string {
-        return $this -> cpfTitular;
-    }
-
     public function getExtrato(): float {
         return $this -> saldo;
+    }
+
+    public static function getContas(): int {
+        return self::$numeroContas;
     }
 }
