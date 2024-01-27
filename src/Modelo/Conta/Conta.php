@@ -1,10 +1,10 @@
 <?php
 
-require_once 'Titular.php';
+namespace Alura\Banco\Modelo\Conta;
 
-class Conta{
+abstract class Conta{
     public readonly Titular $titular;
-    private float $saldo = 0;
+    protected float $saldo = 0;
     private static int $numeroContas = 0;
 
     public function __construct(Titular $titular){
@@ -44,11 +44,21 @@ class Conta{
         $contaDestino -> depositar($valorATransferir);
     }
 
-    public function getExtrato(): float {
+    public function recuperaSaldo(): float {
         return $this -> saldo;
     }
 
-    public static function getContas(): int {
+    public function recuperaNomeTitular(): string {
+        return $this -> titular -> recuperaNome();
+    }
+
+    public function recuperaCpfTitular(): int {
+        return $this -> titular -> recuperaCpf();
+    }
+
+    public static function recuperaNumeroDeContas(): int {
         return self::$numeroContas;
     }
+
+    abstract protected function percentualTarifa(): float;
 }
