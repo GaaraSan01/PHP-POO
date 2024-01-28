@@ -18,6 +18,8 @@ final class Endereco {
     private string $rua;
     private string $numero;
 
+    use AcessoPropriedades;
+
     public function __construct(string $cidade, string $bairro, string $rua, string $numero)
     {
         $this -> cidade = $cidade;

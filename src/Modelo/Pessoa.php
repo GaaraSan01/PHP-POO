@@ -6,6 +6,8 @@ abstract class Pessoa {
     protected string $nome;
     private $cpf;
 
+    use AcessoPropriedades;
+
     public function __construct(string $nome, CPF $cpf)
     {
         $this -> validaNome($nome);

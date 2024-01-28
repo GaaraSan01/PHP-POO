@@ -3,26 +3,28 @@
 require_once 'autoload.php';
 
 use Alura\Banco\Modelo\Conta\Titular;
-use Alura\Banco\Modelo\Endereco;
-use Alura\Banco\Modelo\CPF;
+use Alura\Banco\Modelo\{Endereco, CPF};
 use Alura\Banco\Modelo\Conta\Conta;
 use Alura\Banco\Modelo\Conta\{ContaCorrente, ContaPoupanca};
 
-$endereco = new Endereco('Petrópolis', 'um bairro', 'minha rua', '71B');
-$vinicius = new Titular(new CPF('123.456.789-10'), 'Vinicius Dias', $endereco);
-$primeiraConta = new ContaCorrente($vinicius);
-$primeiraConta-> depositar(500);
-$primeiraConta->sacar(300); // isso é ok
+$viniciushEndereco = new Endereco("Curitiba", "Boqueirão", "Rua Teste", "123");
 
-echo $primeiraConta->recuperaNomeTitular() . PHP_EOL;
-echo $primeiraConta->recuperaCpfTitular() . PHP_EOL;
-echo $primeiraConta->recuperaSaldo() . PHP_EOL;
+$cidade = $viniciushEndereco -> cidade;
 
-$patricia = new Titular(new CPF('698.549.548-10'), 'Patricia', $endereco);
-$segundaConta = new ContaPoupanca($patricia);
-var_dump($segundaConta);
+echo $cidade . PHP_EOL;
 
-$outroEndereco = new Endereco('A', 'b', 'c', '1D');
-$outra = new Conta(new Titular(new CPF('123.654.789-01'), 'Abcdefg', $outroEndereco));
-unset($segundaConta);
+$viniciusCpf = new CPF("123.123.321-12");
+$viniciushTitular  = new Titular(
+    $cpf =  $viniciusCpf, 
+    $nome = "Vinicius H.", 
+    $endereco = $viniciushEndereco
+);
+
+$viniciushConta = new ContaCorrente($viniciushTitular);
+
+$nome = $viniciushConta -> recuperaNomeTitular();
+
+echo $nome . PHP_EOL;
+
+
 echo Conta::recuperaNumeroDeContas();
