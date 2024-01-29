@@ -5,7 +5,7 @@ use Alura\Banco\Modelo\{CPF, Endereco};
 
 require_once 'autoload.php';
 
-$conta = new ContaPoupanca(
+$conta = new ContaCorrente(
     new Titular(
         new CPF('123.456.789-10'),
         'Vinicius Dias',
@@ -13,6 +13,6 @@ $conta = new ContaPoupanca(
     )
 );
 $conta->depositar(500);
-$conta->sacar(100);
+$conta->sacar(200);
 
 echo $conta->recuperaSaldo();

@@ -26,8 +26,7 @@ abstract class Pessoa {
     final protected function validaNome(string $nomeTitular): void
     {
         if(strlen($nomeTitular) < 5){
-            echo "Nome precisa ter pelo menos 5 caracteres";
-            exit();
+            throw new NomeCurtoException($nomeTitular);
         }
     }
 }
